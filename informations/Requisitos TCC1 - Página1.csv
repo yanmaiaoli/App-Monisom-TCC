@@ -1,0 +1,18 @@
+Usuário,Requisito,Descrição
+Administrador geral,Autenticar-se,Como Administrador geral quero realizar login na interface administrativa geral. O email e senha o usuário admin já devem estar persistidos no código da aplicação.
+Administrador geral,Gerenciar escolas,"Como Administrador geral quero cadastrar, editar e consultar escolas cadastradas no sistema."
+Administrador geral,Gerenciar administradores de escolas,"Como Administrador geral quero cadastrar, editar e consultar administradores vinculados às escolas."
+Administrador geral,Associar administrador à escola,"Como Administrador geral quero Vincular um administrador a uma escola específica, e somente uma."
+Administrador de escola,Autenticar-se,"Como Administrador de escola quero realizar meu primeiro login no Sistema Web ao clicar em ""esqueci minha senha"" e criar uma nova senha para o email cadastrado pelo administrador geral."
+ Administrador de escola,Gerenciar salas,"Como Administrador de escola quero poder cadastrar, editar e consultar as salas da escola."
+ Administrador de escola,Gerenciar professores,"Como Administrador de escola quero poder cadastrar, editar e consultar os professores."
+ Administrador de escola,Gerenciar Turmas,"Como Administrador de escola quero poder cadastrar, editar e consultar as turmas da escola."
+ Administrador de escola,Lotar Professores,Como Administrador de escola quero poder associar professores às respectivas turmas.
+Professor,Autenticar-se,"Como Professor quero realizar meu primeiro login no App de monitoramento ao clicar em ""esqueci minha senha"" e criar uma nova senha para o email cadastrado pelo administrador de escola."
+Professor,Visualizar dados Pessoais ,Como Professor quero visualizar meus dados pessoais
+Professor,Visualizar ambientes de monitoramento,"Como Professor, para cada escola que estou cadastrado, quero consultar os ambientes de monitoramento que estou associado. Um ambiente de monitoramento é a associação (feita pelo administrador geral) de um professor a uma escola + turma dessa escola"
+Professor,Realizar monitoramento,"Como Professor quero iniciar um monitoramento (a única informação não cadastrada que devo preencher ao iniciar um monitoramento é qual sala estou), visualizar as informações da coleta, alertas (caso recebido) e encerrar um monitoramento. Ao final de um monitoramento que esteve ativo durante tempo X suficiente para ser considerado para analise de dados, o app deve oferecer algumas perguntas qualitativas e então encerrar o monitoramento. Um professor pode ter varios monitoramentos encerrados, mas somento um em estado ativo por vez."
+Professor,Consultar Monitoramentos,Como Professor quero consultar meus monitoramentos encerrados e suas informações.
+ Administrador de escola,Acompanhar Monitoramentos ativos,"Como Administrador de escola quero visualizar monitoramentos ativos, suas informações e alertas gerados, em tempo real."
+ Administrador de escola,Consultar Monitoramentos,"Como Administrador de escola quero visualizar monitoramentos ativos, suas informações e alertas gerados, em tempo real."
+ Administrador de escola,Indicadores e Filtros,"Como Administrador de escola quero realizar consultas sobre informações chave do historico de monitoramentos, utilizar filtros ainda a serem definidos."

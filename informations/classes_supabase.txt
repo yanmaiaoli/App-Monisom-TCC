@@ -1,0 +1,114 @@
+## Table `class_teacher`
+
+### Columns
+
+| Name | Type | Constraints |
+|------|------|-------------|
+| `id` | `uuid` | Primary |
+| `class_id` | `uuid` |  |
+| `teacher_id` | `uuid` |  |
+| `created_at` | `timestamptz` |  |
+
+
+
+## Table `class`
+
+### Columns
+
+| Name | Type | Constraints |
+|------|------|-------------|
+| `id` | `uuid` | Primary |
+| `school_id` | `uuid` |  |
+| `name` | `text` |  |
+| `turno` | `turno` |  |
+| `created_at` | `timestamptz` |  |
+| `capacidade` | `int4` |  |
+
+## Table `room`
+
+### Columns
+
+| Name | Type | Constraints |
+|------|------|-------------|
+| `id` | `uuid` | Primary |
+| `school_id` | `uuid` |  |
+| `name` | `text` |  |
+| `created_at` | `timestamptz` |  |
+
+
+## Table `school`
+
+### Columns
+
+| Name | Type | Constraints |
+|------|------|-------------|
+| `id` | `uuid` | Primary |
+| `name` | `text` |  |
+| `created_at` | `timestamptz` |  |
+
+
+## Table `teacher`
+
+### Columns
+
+| Name | Type | Constraints |
+|------|------|-------------|
+| `id` | `uuid` | Primary |
+| `name` | `text` |  |
+| `email` | `text` |  |
+| `created_at` | `timestamptz` |  |
+
+
+## Table `school_teacher`
+
+### Columns
+
+| Name | Type | Constraints |
+|------|------|-------------|
+| `school_id` | `uuid` | Primary |
+| `teacher_id` | `uuid` | Primary |
+
+
+## Table `monitoring`
+
+### Columns
+
+| Name | Type | Constraints |
+|------|------|-------------|
+| `id` | `uuid` | Primary |
+| `class_id` | `uuid` |  |
+| `teacher_id` | `uuid` |  |
+| `room_id` | `uuid` |  |
+| `started_at` | `timestamptz` |  |
+| `finished_at` | `timestamptz` |  Nullable |
+| `perception` | `int4` |  Nullable |
+| `stress` | `int4` |  Nullable |
+| `created_at` | `timestamptz` |  |
+
+
+## Table `monitoring_reading`
+
+### Columns
+
+| Name | Type | Constraints |
+|------|------|-------------|
+| `id` | `uuid` | Primary |
+| `monitoring_id` | `uuid` |  |
+| `recorded_at` | `timestamptz` |  |
+| `laeq` | `float8` |  |
+
+
+## Table `school_admin`
+
+### Columns
+
+| Name | Type | Constraints |
+|------|------|-------------|
+| `id` | `uuid` | Primary |
+| `email` | `text` |  Unique |
+| `password_hash` | `text` |  |
+| `name` | `text` |  |
+| `school_id` | `uuid` |  |
+| `created_at` | `timestamptz` |  |
+
+

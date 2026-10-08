@@ -1,0 +1,88 @@
+2026-10-08T11:34:07.387-03:00  INFO 26700 --- [monisom-web] [           main] com.monisom.MonisomWebApplication        : Starting MonisomWebApplication using Java 21.0.11 with PID 26700 (C:\Users\Yan\IdeaProjects\monisom-web\target\classes started by Yan in C:\Users\Yan\IdeaProjects\monisom-web)
+2026-10-08T11:34:07.390-03:00  INFO 26700 --- [monisom-web] [           main] com.monisom.MonisomWebApplication        : No active profile set, falling back to 1 default profile: "default"
+2026-10-08T11:34:08.018-03:00  INFO 26700 --- [monisom-web] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-10-08T11:34:08.068-03:00  INFO 26700 --- [monisom-web] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 43 ms. Found 6 JPA repository interfaces.
+2026-10-08T11:34:08.513-03:00  INFO 26700 --- [monisom-web] [           main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8080 (http)
+2026-10-08T11:34:08.528-03:00  INFO 26700 --- [monisom-web] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-10-08T11:34:08.528-03:00  INFO 26700 --- [monisom-web] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.24]
+2026-10-08T11:34:08.583-03:00  INFO 26700 --- [monisom-web] [           main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 1152 ms
+2026-10-08T11:34:08.702-03:00  INFO 26700 --- [monisom-web] [           main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-10-08T11:34:08.753-03:00  INFO 26700 --- [monisom-web] [           main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.4.5.Final
+2026-10-08T11:34:09.233-03:00  INFO 26700 --- [monisom-web] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-10-08T11:34:09.264-03:00  INFO 26700 --- [monisom-web] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-10-08T11:34:11.369-03:00  INFO 26700 --- [monisom-web] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@54687fd0
+2026-10-08T11:34:11.370-03:00  INFO 26700 --- [monisom-web] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-10-08T11:34:12.652-03:00  INFO 26700 --- [monisom-web] [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://aws-0-us-west-2.pooler.supabase.com:5432/postgres?sslmode=require]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 17.6
+	Default catalog/schema: postgres/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-10-08T11:34:13.587-03:00  INFO 26700 --- [monisom-web] [           main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-10-08T11:34:13.595-03:00  INFO 26700 --- [monisom-web] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-10-08T11:34:13.653-03:00  INFO 26700 --- [monisom-web] [           main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-10-08T11:34:13.921-03:00  INFO 26700 --- [monisom-web] [           main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name schoolAdminDetailsService
+2026-10-08T11:34:13.990-03:00  WARN 26700 --- [monisom-web] [           main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'readingProducer' defined in file [C:\Users\Yan\IdeaProjects\monisom-web\target\classes\com\monisom\kafka\ReadingProducer.class]: Unsatisfied dependency expressed through constructor parameter 0: No qualifying bean of type 'org.springframework.kafka.core.KafkaTemplate<java.lang.String, java.lang.String>' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}
+2026-10-08T11:34:13.991-03:00  INFO 26700 --- [monisom-web] [           main] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-10-08T11:34:13.992-03:00  INFO 26700 --- [monisom-web] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-10-08T11:34:14.752-03:00  INFO 26700 --- [monisom-web] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-10-08T11:34:14.758-03:00  INFO 26700 --- [monisom-web] [           main] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2026-10-08T11:34:14.778-03:00  INFO 26700 --- [monisom-web] [           main] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-10-08T11:34:14.804-03:00 ERROR 26700 --- [monisom-web] [           main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Parameter 0 of constructor in com.monisom.kafka.ReadingProducer required a bean of type 'org.springframework.kafka.core.KafkaTemplate' that could not be found.
+
+
+Action:
+
+Consider defining a bean of type 'org.springframework.kafka.core.KafkaTemplate' in your configuration.
+
+
+Process finished with exit code 1
+
+
+
+
+************************
+
+
+PS C:\Users\Yan\IdeaProjects\monisom-web\kafka> docker compose up -d                                                                                                                             
+[+] up 7/7
+ ✔ Network kafka_kafka-net   Created                                                                                                                                                                                            0.0s
+ ✔ Volume kafka_kafka_3_data Created                                                                                                                                                                                            0.0s
+ ✔ Volume kafka_kafka_1_data Created                                                                                                                                                                                            0.0s
+ ✔ Volume kafka_kafka_2_data Created                                                                                                                                                                                            0.0s
+ ✔ Container kafka-2         Started                                                                                                                                                                                            0.4s
+ ✔ Container kafka-3         Started                                                                                                                                                                                            0.5s
+ ✔ Container kafka-1         Started                                                                                                                                                                                            0.4s
+
+What's next:
+    Filter, search, and stream logs from all your Compose services
+    in one place with Docker Desktop's Logs view. docker-desktop://dashboard/logs
+PS C:\Users\Yan\IdeaProjects\monisom-web\kafka> docker compose ps                                                                                                                                
+NAME      IMAGE                COMMAND                  SERVICE   CREATED              STATUS              PORTS
+kafka-1   apache/kafka:3.7.1   "/__cacert_entrypoin…"   kafka-1   About a minute ago   Up About a minute   0.0.0.0:19092->9094/tcp, [::]:19092->9094/tcp
+kafka-2   apache/kafka:3.7.1   "/__cacert_entrypoin…"   kafka-2   About a minute ago   Up About a minute   0.0.0.0:29092->9094/tcp, [::]:29092->9094/tcp
+kafka-3   apache/kafka:3.7.1   "/__cacert_entrypoin…"   kafka-3   About a minute ago   Up About a minute   0.0.0.0:39092->9094/tcp, [::]:39092->9094/tcp
+PS C:\Users\Yan\IdeaProjects\monisom-web\kafka> docker exec -it kafka-1 /opt/kafka/bin/kafka-console-consumer.sh \  --topic monitoring-reading --from-beginning --bootstrap-server localhost:9092
+[2026-10-08 14:34:58,787] WARN [Consumer clientId=console-consumer, groupId=console-consumer-92837] Error while fetching metadata with correlation id 2 : {monitoring-reading=UNKNOWN_TOPIC_OR_PARTITION} (org.apache.kafka.clients.NetworkClient)
+^CProcessed a total of 0 messages
+
+What's next:
+    Try Docker Debug for seamless, persistent debugging tools in any container or image → docker debug kafka-1
+    Learn more at https://docs.docker.com/go/debug-cli/
+PS C:\Users\Yan\IdeaProjects\monisom-web\kafka> 

@@ -1,0 +1,258 @@
+Artigo 1: Study of indoor and outdoor noise in primary schools in the city of São Paulo – Brazil (Aquilino et al., 2024)
+Objetivo do Estudo
+Avaliar os níveis de ruído interno e externo em salas de aula de cinco escolas primárias públicas da cidade de São Paulo, comparando os resultados com os limites estabelecidos pela legislação brasileira (ABNT NBR 10151 e NBR 10152) e pela Organização Mundial da Saúde (OMS). Além disso, buscou-se avaliar outros descritores acústicos como LAeq, L10, L90, SIL e PSIL, e discutir a necessidade de definir metodologias padronizadas para medições de ruído em escolas que sejam representativas para estudos epidemiológicos.
+
+Metodologia
+Tipo de estudo: Estudo transversal (cross-sectional).
+
+Local e período: Cinco escolas municipais de ensino fundamental (EMEFs) da cidade de São Paulo, Brasil. As medições foram realizadas em abril de 2015, durante o período de aulas (pré-pandemia de COVID-19).
+
+Escolas estudadas:
+
+Escola A – EMEF Calogeras
+
+Escola B – EMEF Ferreira
+
+Escola C – EMEF Leme
+
+Escola D – EMEF Rizzini
+
+Escola E – EMEF Becker
+
+Características das escolas:
+
+Número de alunos: 22 a 30 por sala
+
+Andar: 1º andar ou térreo
+
+Mobiliário: 31 a 33 carteiras
+
+Ruído externo: tráfego aéreo e terrestre, tráfego terrestre, oficina mecânica
+
+Tipo de área: comercial/residencial ou residencial
+
+Seleção da amostra: Em cada escola, foi selecionada uma sala de aula do 3º ano (alunos de 9 a 10 anos).
+
+Equipamentos utilizados:
+
+Dois medidores de nível de som da marca 01dB, modelo Blue Solo – Classe 1.
+
+Faixa de frequência: 50 Hz a 10.000 Hz.
+
+Tempo de aquisição: 500 ms.
+
+Armazenamento "Full" para permitir o cálculo de todos os descritores.
+
+Software DBTRAIT V.5.2 (proprietário da 01dB) para transferência e processamento dos dados.
+
+Descritores acústicos avaliados:
+
+Nível de pressão sonora (Lp)
+
+Nível de pressão sonora máximo (Lpmax) e mínimo (Lpmin)
+
+Níveis estatísticos L10 (ruído intrusivo) e L90 (ruído residual)
+
+Nível de pressão sonora equivalente ponderado em A (LAeq)
+
+Speech Interference Level (SIL) – média aritmética dos níveis nas bandas de oitava de 500 Hz, 1000 Hz, 2000 Hz e 4000 Hz
+
+PSIL (Possivelmente Preferred Speech Interference Level)
+
+Normas utilizadas:
+
+ABNT NBR 10151:2019 – Avaliação de ruído em áreas habitadas
+
+ABNT NBR 10152:2017 – Níveis de pressão sonora para conforto acústico
+
+Diretrizes da OMS (1999) – Guidelines for Community Noise
+
+Análise de dados: Os dados brutos foram processados para obtenção dos descritores acústicos. Os resultados foram expressos em tabelas e gráficos (séries temporais e espectros de frequência).
+
+Resultados Principais
+Tabela 3 – Valores médios dos descritores acústicos:
+
+Escola	LAeq Interno	L10	L90	L10-L90	SIL	LAeq Externo
+A	79	83	60	23	85	55
+B	77	82	61	21	102	59
+C	72	75	49	26	81	54
+D	72	85	55	30	81	59
+E	88	85	55	30	86	55
+Observações:
+
+Em todas as escolas, o LAeq interno excedeu o limite de 35 dB estabelecido pela NBR 10152 e pela OMS para salas de aula.
+
+A Escola E apresentou o pior caso: LAeq de 88 dB.
+
+O SIL mínimo foi de 81 dB (Escolas C e D), indicando que a comunicação verbal é "difícil" a partir de 0,6 m de distância do professor.
+
+A Escola B apresentou SIL de 102 dB, indicando comunicação verbal "difícil a impossível".
+
+Todas as escolas excederam o limite máximo de LAeq estabelecido pela NBR 10151 para área "estritamente residencial urbana ou hospitalar ou escolar".
+
+O ruído é predominantemente gerado dentro da própria escola, pelos alunos.
+
+Conclusão do Artigo 1:
+Os níveis de ruído em todas as escolas estão acima dos limites máximos estabelecidos pelas normas NBR 10151 e NBR 10152, e também acima do valor de 65 dB(A) considerado adequado pela OMS para salas de aula. Os usuários das salas de aula estão expostos a níveis de ruído que dificultam a comunicação do professor, perturbam a concentração e podem afetar a saúde. É necessário reduzir o ruído interno nas escolas e minimizar a transmissão de som entre salas. A questão também envolve educação, tanto individual quanto coletiva.
+
+Artigo 2: Quality of Life and Acoustic Comfort in Educational Environments of Curitiba, Brazil (Levandoski & Zannin, 2020)
+Objetivo do Estudo
+Comparar a qualidade de vida (por meio do questionário WHOQOL-Bref) de 61 professores que trabalham em escolas com diferentes condições acústicas. Secundariamente, buscou-se verificar: (1) níveis de pressão sonora no entorno das escolas; (2) níveis de ruído de fundo no interior das salas de aula; (3) tempos de reverberação das salas; (4) percepção do professor ao ruído no ambiente de trabalho; (5) intensidade vocal de fala do professor em sala de aula; e (6) nível de qualidade de vida do professor.
+
+Metodologia
+Tipo de estudo: Pesquisa descritiva de caráter exploratório.
+
+Local: Duas escolas de ensino fundamental na cidade de Curitiba, Paraná, Brasil.
+
+Participantes: 61 professores, sendo 39 mulheres e 22 homens, com idades entre 23 e 63 anos (média de 38 anos). Critérios de inclusão: boa saúde, sem terapia medicamentosa, ensino superior completo, mais de 2 anos de experiência como professor do ensino fundamental e médio, e jornada de trabalho superior a 10 horas semanais.
+
+Aspectos éticos: Todos os participantes assinaram termo de consentimento livre e esclarecido. O estudo foi aprovado pelo Comitê de Ética em Pesquisa da Universidade Federal do Paraná (Protocolo nº 15031).
+
+Análise estatística: Análise descritiva com medidas de tendência central e dispersão (SPSS versão 18). Teste de Shapiro-Wilk para normalidade das variáveis quantitativas. Testes de Mann-Whitney U e Kruskal-Wallis como procedimentos não paramétricos, com nível de significância de 5%.
+
+Estudo 1 – Caracterização do ambiente:
+
+Níveis de pressão sonora no entorno das escolas: Medidos com medidor de nível de som Bruel&Kjaer 2260. Quatro pontos de medição, espaçados 20 metros, ao redor do perímetro de cada escola. Três medições de 5 minutos em cada ponto. Medições realizadas à tarde, em dias letivos, na ausência de fontes atípicas (chuva, vento forte), conforme NBR 10151.
+
+Níveis de ruído de fundo no interior das salas: Medidos com janelas abertas, conforme NBR 10152, durante o recreio (alunos no pátio). Quatro salas por escola, selecionadas por amostragem aleatória simples. Três medições de 3 minutos em cada sala com janelas voltadas para a rua.
+
+Tempo de reverberação (TR): Medido conforme ISO 3382-2. Equipamentos: fonte sonora omnidirecional, amplificador de medição e analisador de som de dois canais Bruel&Kjaer 2260. Segundo DIN 18041, salas de aula devem apresentar TR médio de até 1,0 segundo nas frequências de 500, 1.000 e 2.000 Hz.
+
+Caracterização das escolas:
+
+Escola 1 (acusticamente confortável): Localizada na área central da cidade, próxima a um parque público, construída na década de 1930. Salas com volume de 194 m³ (3,70 × 5,90 × 8,90 m), pisos de madeira, paredes e tetos de tijolo.
+
+Escola 2 (acusticamente desconfortável): Localizada no perímetro externo do centro, caracterizada por tráfego pesado em direção a uma rodovia. Construída na década de 1950. Salas com volume de 168 m³ (3,50 × 6,00 × 8,00 m), pisos cerâmicos, paredes e tetos de tijolo.
+
+Estudo 2 – Caracterização dos participantes:
+
+Questionário WHOQOL-Bref: 26 questões referentes às duas semanas anteriores. Duas questões sobre percepção individual da qualidade de vida; as demais subdivididas em quatro domínios: físico, psicológico, relações sociais e meio ambiente.
+
+Percepção de ruído de fundo: Inventário de efeitos auditivos e extra-auditivos da exposição ao ruído.
+
+Intensidade vocal (SPL) dos professores: Medida em situação de fala normal em sala de aula durante períodos de 45 minutos. Medidor de dose de ruído Bruel&Kjaer 4445, com microfone fixado na camisa, conforme ISO 9921.
+
+Resultados Principais
+Tabela 1 – Caracterização dos níveis de som contínuo equivalente (Leq) nas duas escolas:
+
+Parâmetro	Escola 1 (confortável)	Escola 2 (desconfortável)	P
+Leq externo (média)	69,0 dB	73,5 dB	0,037*
+Leq interno (média)	54,9 dB	74,0 dB	< 0,001*
+Tempo de reverberação (sala 1)	0,91 s	1,67 s	< 0,001*
+Tempo de reverberação (sala 2)	0,88 s	1,76 s	< 0,001*
+*P < 0,05
+
+Contagem de veículos:
+
+Escola 2: 506 carros, 51 motos, 24 caminhões, 18 ônibus.
+
+Escola 1: 295 carros, 16 motos, 6 caminhões, 9 ônibus.
+
+Tabela 2 – Avaliação da qualidade de vida (WHOQOL-Bref):
+
+Domínio	Total (n=61)	Escola 1 (n=29)	Escola 2 (n=32)	P
+Geral	66,2	65,7	66,7	0,783
+Físico	68,9	70,6	67,2	0,410
+Psicológico	68,6	68,4	68,7	0,947
+Relações Sociais	69,9	66,9	72,7	0,258
+Meio Ambiente	61,2	59,9	63,1	0,316
+Tabela 3 – Valores médios dos parâmetros estatísticos da intensidade vocal dos professores:
+
+Parâmetro	Total (n=61)	Escola 1 (n=29)	Escola 2 (n=32)	P
+PLAeq	87,3	88,3	86,5	0,033*
+LAmax	98,3	98,6	98,0	0,209
+LAmin	57,8	57,9	57,7	0,882
+L10	91,5	92,4	90,6	0,033*
+L50	83,9	85,0	82,9	0,066
+L90	71,7	72,4	71,0	0,330
+Tabela 5 – Classificação da intensidade vocal dos professores conforme ISO 9921:
+
+Classificação	Total (n=61)	Escola 1 (n=29)	Escola 2 (n=32)	P
+Relaxado (64-69 dB(A))	—	—	—	—
+Normal (70-75 dB(A))	—	—	—	0,082
+Moderado (76-81 dB(A))	5 (8,2%)	—	5 (15,6%)	—
+Alto (82-87 dB(A))	26 (42,6%)	13 (44,8%)	13 (40,6%)	—
+Muito alto (88-93 dB(A))	30 (49,2%)	16 (55,2%)	14 (43,8%)	—
+Gritando (acima de 94 dB(A))	—	—	—	—
+Outros resultados:
+
+55,7% dos professores percebem níveis de ruído elevados.
+
+68,9% afirmam que a sala de aula é o local com maior poluição sonora.
+
+34,4% declararam ter que fazer um esforço vocal tremendo para superar o ruído de fundo.
+
+27,9% frequentemente tiveram que recorrer a gritos.
+
+27,9% relataram rouquidão; 13,1% apresentaram falha na voz; 18,0% sentiram fadiga ao falar; 32,8% relataram dor diária ou queimação na garganta ao final do dia de trabalho.
+
+Nenhum professor utilizou uma voz de fala classificada como "normal" durante as atividades profissionais.
+
+Correlação positiva e significativa entre o Leq da intensidade vocal dos professores e o número de alunos por turma (r = +0,511; P < 0,001), com efeito de 24,8%.
+
+Conclusão do Artigo 2:
+O objetivo principal revelou diferenças nos ambientes acústicos das duas escolas. No entanto, na opinião dos professores, a principal fonte de desconforto acústico não se origina fora da sala de aula, corredores ou ginásios, mas dentro da sala de aula, causada pelos próprios alunos durante as aulas. Não foi encontrada diferença significativa na qualidade de vida percebida entre os professores das duas escolas em seus respectivos domínios. A intensidade vocal dos professores excedeu os limites de tolerabilidade para a segurança auditiva, o que também piora indiretamente a condição auditiva dos alunos. As condições básicas necessárias para garantir a saúde dos participantes durante sua jornada de trabalho não são satisfatórias. O número de alunos nas salas de aula foi considerado um fator de risco para a saúde ocupacional.
+
+Comparação entre os Dois Artigos
+Aspecto	Artigo 1 (Aquilino et al., 2024)	Artigo 2 (Levandoski & Zannin, 2020)
+Local	São Paulo (5 escolas)	Curitiba (2 escolas)
+Período	Abril de 2015	Não especificado (anterior a 2020)
+Tipo de estudo	Transversal	Descritivo exploratório
+Participantes	Alunos do 3º ano (9-10 anos)	61 professores
+Foco	Ruído interno e externo; descritores acústicos	Qualidade de vida; intensidade vocal; conforto acústico
+Descritores acústicos	LAeq, L10, L90, SIL, PSIL, Lp, Lpmax, Lpmin	Leq, TR, SPL (LAeq, LAmax, LAmin, L10, L50, L90)
+Instrumentos	2 medidores 01dB Blue Solo (Classe 1)	Bruel&Kjaer 2260; Bruel&Kjaer 4445 (dosímetro)
+Normas	NBR 10151, NBR 10152, OMS	NBR 10151, NBR 10152, ISO 3382-2, DIN 18041, ISO 9921
+Principais resultados	LAeq interno > 35 dB em todas as escolas; SIL ≥ 81 dB; ruído interno superior ao externo	Leq interno 54,9 dB (confortável) vs. 74,0 dB (desconfortável); TR > 1,0 s na escola desconfortável; intensidade vocal > 80 dB(A) em 96,7% dos professores
+Conclusão principal	Níveis de ruído acima dos limites legais e da OMS; necessário reduzir ruído interno	Principal fonte de desconforto é interna (alunos); intensidade vocal excessiva; condições de trabalho insatisfatórias
+Atendimento aos Descritores e Metodologia
+Artigo 1
+Descritores utilizados: LAeq, L10, L90, SIL, PSIL, Lp, Lpmax, Lpmin.
+
+Metodologia:
+
+Medições com medidores de classe 1, faixa de 50 Hz a 10.000 Hz, tempo de aquisição de 500 ms.
+
+Armazenamento "Full" para cálculo de todos os descritores.
+
+Seleção de uma sala de 3º ano por escola.
+
+Comparação com NBR 10151 e NBR 10152.
+
+Análise de séries temporais e espectros de frequência.
+
+Pontos fortes: Uso de múltiplos descritores acústicos; comparação com normas nacionais e internacionais; análise detalhada de séries temporais e espectros.
+
+Limitações: Não houve medição de tempo de reverberação; não houve avaliação subjetiva (percepção dos usuários); amostra restrita a cinco escolas de São Paulo.
+
+Artigo 2
+Descritores utilizados: Leq (externo e interno), tempo de reverberação (TR), SPL da voz do professor (LAeq, LAmax, LAmin, L10, L50, L90), qualidade de vida (WHOQOL-Bref).
+
+Metodologia:
+
+Medições externas: 4 pontos por escola, 3 medições de 5 minutos cada.
+
+Medições internas: 4 salas por escola, 3 medições de 3 minutos cada, com janelas abertas, durante o recreio.
+
+Medição de TR conforme ISO 3382-2.
+
+Aplicação do WHOQOL-Bref (26 questões).
+
+Medição da intensidade vocal com dosímetro Bruel&Kjaer 4445 durante 45 minutos de aula.
+
+Análise estatística não paramétrica (Mann-Whitney U, Kruskal-Wallis).
+
+Pontos fortes: Abordagem multidisciplinar (acústica + qualidade de vida + saúde vocal); uso de questionário validado (WHOQOL-Bref); medição da intensidade vocal em situação real de sala de aula; análise estatística robusta.
+
+Limitações: Amostra de apenas duas escolas; não houve medição de descritores como L10 e L90 para o ruído ambiental (apenas para a voz); não houve avaliação de inteligibilidade de fala (STI ou SIL); os resultados de qualidade de vida não mostraram diferenças significativas entre as escolas.
+
+Considerações Finais
+Ambos os artigos abordam a problemática do ruído em escolas brasileiras, mas com enfoques complementares:
+
+O Artigo 1 foca na caracterização física do ruído (interno e externo) e na comparação com normas técnicas, utilizando uma variedade de descritores acústicos. Seu principal achado é que o ruído interno é predominante e excede largamente os limites recomendados, prejudicando a comunicação e a concentração.
+
+O Artigo 2 foca nos efeitos humanos do ruído (qualidade de vida, saúde vocal dos professores) e na percepção subjetiva, além de medir parâmetros acústicos como Leq, TR e intensidade vocal. Seu principal achado é que a principal fonte de desconforto é interna (alunos), e que os professores precisam elevar excessivamente a voz, com impactos na saúde vocal.
+
+Convergência: Ambos concluem que o ruído interno nas salas de aula é o principal problema, que os níveis excedem os limites legais e recomendados, e que há necessidade de intervenções para melhorar o conforto acústico e proteger a saúde de alunos e professores.
+
+Divergência: O Artigo 1 não avalia qualidade de vida nem saúde vocal; o Artigo 2 não utiliza descritores como SIL ou PSIL, nem avalia a inteligibilidade de fala de forma objetiva.
