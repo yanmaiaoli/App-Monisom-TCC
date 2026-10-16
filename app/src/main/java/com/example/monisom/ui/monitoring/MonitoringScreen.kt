@@ -2,6 +2,8 @@ package com.example.monisom.ui.monitoring
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.os.Build
+import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
@@ -52,6 +54,7 @@ import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.monisom.audio.RecordingState
 import com.example.monisom.data.Repository
 import com.example.monisom.data.Room
 import com.example.monisom.ui.common.friendlyError
@@ -71,19 +74,28 @@ fun MonitoringScreen(
     var rooms by remember { mutableStateOf<List<Room>?>(null) }
     var roomsError by remember { mutableStateOf<String?>(null) }
     var reloadKey by remember { mutableStateOf(0) }
-    var selectedRoomId by remember { mutableStateOf<String?>(null) }
+    var selectedRoomId by remember { mutableStateOf(RecordingState.roomId.value) }
     var showEndDialog by remember { mutableStateOf(false) }
     var showUnansweredDialog by remember { mutableStateOf(false) }
 
+    val requiredPermissions = remember {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            arrayOf(Manifest.permission.RECORD_AUDIO, Manifest.permission.POST_NOTIFICATIONS)
+        } else {
+            arrayOf(Manifest.permission.RECORD_AUDIO)
+        }
+    }
+
     var hasPermission by remember {
         mutableStateOf(
-            ContextCompat.checkSelfPermission(context, Manifest.permission.RECORD_AUDIO) ==
-                PackageManager.PERMISSION_GRANTED
+            requiredPermissions.all {
+                ContextCompat.checkSelfPermission(context, it) == PackageManager.PERMISSION_GRANTED
+            }
         )
     }
     val permissionLauncher = rememberLauncherForActivityResult(
-        ActivityResultContracts.RequestPermission()
-    ) { granted -> hasPermission = granted }
+        ActivityResultContracts.RequestMultiplePermissions()
+    ) { grants -> hasPermission = requiredPermissions.all { grants[it] == true } }
 
     LaunchedEffect(schoolId, reloadKey) {
         rooms = null
@@ -98,17 +110,35 @@ fun MonitoringScreen(
 
     LaunchedEffect(selectedRoomId) {
         if (selectedRoomId != null && !hasPermission) {
-            permissionLauncher.launch(Manifest.permission.RECORD_AUDIO)
+            permissionLauncher.launch(requiredPermissions)
         }
     }
 
     LaunchedEffect(hasPermission, selectedRoomId, classId) {
         val roomId = selectedRoomId
-        if (hasPermission && roomId != null) viewModel.start(classId, roomId)
+        if (hasPermission && roomId != null) viewModel.start(schoolId, classId, roomId)
     }
 
     LaunchedEffect(state.done) {
         if (state.done) onFinished()
+    }
+
+    BackHandler {
+        val roomId = selectedRoomId
+        if (roomId == null || !hasPermission) {
+            onFinished()
+        } else {
+            when (state.phase) {
+                MonitoringPhase.Recording -> showEndDialog = true
+                MonitoringPhase.Questionnaire -> {
+                    val p = state.perception
+                    val s = state.stress
+                    if (p != null && s != null) viewModel.finalize()
+                    else showUnansweredDialog = true
+                }
+                MonitoringPhase.Saving -> Unit
+            }
+        }
     }
 
     Scaffold(
@@ -182,7 +212,7 @@ fun MonitoringScreen(
                 }
                 !hasPermission -> {
                     PermissionContent(
-                        onRequest = { permissionLauncher.launch(Manifest.permission.RECORD_AUDIO) },
+                        onRequest = { permissionLauncher.launch(requiredPermissions) },
                     )
                 }
                 else -> {

@@ -19,6 +19,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.example.monisom.audio.RecordingState
 import com.example.monisom.data.supabase
 import com.example.monisom.ui.environment.EnvironmentScreen
 import com.example.monisom.ui.forgot.ForgotPasswordScreen
@@ -29,7 +30,11 @@ import io.github.jan.supabase.auth.auth
 import io.github.jan.supabase.auth.status.SessionStatus
 
 @Composable
-fun MoniSomApp() {
+fun MoniSomApp(
+    pendingSchoolId: String? = null,
+    pendingClassId: String? = null,
+    onPendingConsumed: () -> Unit = {},
+) {
     LaunchedEffect(Unit) {
         runCatching { supabase.auth.loadFromStorage() }
     }
@@ -37,7 +42,7 @@ fun MoniSomApp() {
 
     when (sessionStatus) {
         is SessionStatus.Initializing -> LoadingScreen()
-        is SessionStatus.Authenticated -> MainNavHost()
+        is SessionStatus.Authenticated -> MainNavHost(pendingSchoolId, pendingClassId, onPendingConsumed)
         else -> AuthNavHost()
     }
 }
@@ -66,7 +71,11 @@ private fun AuthNavHost() {
 }
 
 @Composable
-private fun MainNavHost() {
+private fun MainNavHost(
+    pendingSchoolId: String?,
+    pendingClassId: String?,
+    onPendingConsumed: () -> Unit,
+) {
     val nav = rememberNavController()
     NavHost(navController = nav, startDestination = "home") {
         composable("home") {
@@ -124,6 +133,25 @@ private fun MainNavHost() {
                     nav.popBackStack()
                 },
             )
+        }
+    }
+
+    LaunchedEffect(pendingSchoolId, pendingClassId) {
+        if (pendingSchoolId != null && pendingClassId != null) {
+            nav.navigate("monitoring/$pendingSchoolId/$pendingClassId") {
+                launchSingleTop = true
+            }
+            onPendingConsumed()
+        }
+    }
+
+    LaunchedEffect(Unit) {
+        val sid = RecordingState.schoolId.value
+        val cid = RecordingState.classId.value
+        if (RecordingState.monitoringId.value != null && sid != null && cid != null) {
+            nav.navigate("monitoring/$sid/$cid") {
+                launchSingleTop = true
+            }
         }
     }
 }
