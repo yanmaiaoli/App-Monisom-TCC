@@ -1,11 +1,11 @@
 package com.example.monisom.audio
 
 import kotlin.math.PI
-import kotlin.math.abs
 import kotlin.math.cos
 import kotlin.math.log10
 import kotlin.math.sin
 import kotlin.math.sqrt
+import kotlin.math.tan
 
 object AudioCalculations {
 
@@ -14,9 +14,10 @@ object AudioCalculations {
     private const val REFERENCE_DBFS = 32767.0
     private const val EPSILON = 1e-10
 
-    // Offset de calibração dB FS -> dB SPL (estimado; ajustar por aparelho)
-    var dbToSplOffset: Double = 80.0
+    // Offset de calibração dB FS -> dB SPL (estimado comparando com o NoiseCapture)
+    var dbToSplOffset: Double = 93.0
 
+    // RMS das amostras, normalizado pelo fundo de escala, em dBFS
     fun dbFsFromEnergy(sumSquares: Double, count: Int): Double {
         if (count <= 0) return -120.0
         val rms = sqrt(sumSquares / count)
@@ -25,6 +26,7 @@ object AudioCalculations {
         return 20.0 * log10(safe)
     }
 
+    // soma a constante de calibração para obter o nível de pressão sonora
     fun dbFsToDbSpl(dbFs: Double): Double = dbFs + dbToSplOffset
 
     fun dbSplFromEnergy(sumSquares: Double, count: Int): Double =
@@ -48,6 +50,7 @@ class LevelAccumulator {
         count = 0
     }
 
+    // converte a energia acumulada em nível de pressão sonora (dB)
     fun dbSpl(): Double = AudioCalculations.dbSplFromEnergy(sumSquares, count)
 }
 
@@ -73,36 +76,52 @@ class AWeightingFilter(private val sampleRate: Int) {
             y1 = y
             return y
         }
+
+        fun magnitude(theta: Double): Double {
+            val c1 = cos(theta)
+            val s1 = sin(theta)
+            val c2 = cos(2 * theta)
+            val s2 = sin(2 * theta)
+            val nRe = b0 + b1 * c1 + b2 * c2
+            val nIm = -(b1 * s1 + b2 * s2)
+            val dRe = 1.0 + a1 * c1 + a2 * c2
+            val dIm = -(a1 * s1 + a2 * s2)
+            return sqrt((nRe * nRe + nIm * nIm) / (dRe * dRe + dIm * dIm))
+        }
     }
 
     private val biquads: List<Biquad>
     private val gain: Double
 
     init {
-        val polesHz = doubleArrayOf(20.598997, 107.65265, 737.86223, 12194.217)
-        val zps = DoubleArray(polesHz.size)
-        biquads = polesHz.mapIndexed { i, f ->
-            val w = 2.0 * PI * f
-            val zp = (2.0 * sampleRate - w) / (2.0 * sampleRate + w)
-            zps[i] = zp
-            Biquad(1.0, 0.0, -1.0, -2.0 * zp, zp * zp)
-        }
-        gain = computeGain(zps)
-    }
+        val f1 = 20.598997
+        val f2 = 107.65265
+        val f3 = 737.86223
+        val f4 = 12194.217
 
-    private fun computeGain(zps: DoubleArray): Double {
+        fun zp(f: Double): Double {
+            val w = 2.0 * sampleRate * tan(PI * f / sampleRate)
+            return (2.0 * sampleRate - w) / (2.0 * sampleRate + w)
+        }
+
+        val z1 = zp(f1)
+        val z2 = zp(f2)
+        val z3 = zp(f3)
+        val z4 = zp(f4)
+
+        biquads = listOf(
+            Biquad(1.0, -2.0, 1.0, -2.0 * z1, z1 * z1),
+            Biquad(1.0, 2.0, 1.0, -2.0 * z4, z4 * z4),
+            Biquad(1.0, -2.0, 1.0, -(z2 + z3), z2 * z3),
+        )
+
         val theta = 2.0 * PI * 1000.0 / sampleRate
-        val sinTheta = sin(theta)
-        val cosTheta = cos(theta)
-        var magnitude = 1.0
-        for (zp in zps) {
-            magnitude *= (2.0 * abs(sinTheta)) / (1.0 - 2.0 * zp * cosTheta + zp * zp)
-        }
-        return if (magnitude == 0.0) 1.0 else 1.0 / magnitude
+        val mag = biquads.fold(1.0) { acc, b -> acc * b.magnitude(theta) }
+        gain = if (mag == 0.0) 1.0 else 1.0 / mag
     }
 
-    fun filter(samples: DoubleArray): DoubleArray {
-        for (i in samples.indices) {
+    fun filter(samples: DoubleArray, length: Int = samples.size): DoubleArray {
+        for (i in 0 until length) {
             var y = samples[i]
             for (bq in biquads) {
                 y = bq.process(y)

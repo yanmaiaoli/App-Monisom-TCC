@@ -1,11 +1,6 @@
 package com.example.monisom.ui.monitoring
 
-import android.Manifest
-import android.content.pm.PackageManager
-import android.os.Build
 import androidx.activity.compose.BackHandler
-import androidx.activity.compose.rememberLauncherForActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -48,10 +43,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.monisom.audio.RecordingState
@@ -69,7 +62,6 @@ fun MonitoringScreen(
     viewModel: MonitoringViewModel = viewModel(),
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
-    val context = LocalContext.current
 
     var rooms by remember { mutableStateOf<List<Room>?>(null) }
     var roomsError by remember { mutableStateOf<String?>(null) }
@@ -77,25 +69,6 @@ fun MonitoringScreen(
     var selectedRoomId by remember { mutableStateOf(RecordingState.roomId.value) }
     var showEndDialog by remember { mutableStateOf(false) }
     var showUnansweredDialog by remember { mutableStateOf(false) }
-
-    val requiredPermissions = remember {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            arrayOf(Manifest.permission.RECORD_AUDIO, Manifest.permission.POST_NOTIFICATIONS)
-        } else {
-            arrayOf(Manifest.permission.RECORD_AUDIO)
-        }
-    }
-
-    var hasPermission by remember {
-        mutableStateOf(
-            requiredPermissions.all {
-                ContextCompat.checkSelfPermission(context, it) == PackageManager.PERMISSION_GRANTED
-            }
-        )
-    }
-    val permissionLauncher = rememberLauncherForActivityResult(
-        ActivityResultContracts.RequestMultiplePermissions()
-    ) { grants -> hasPermission = requiredPermissions.all { grants[it] == true } }
 
     LaunchedEffect(schoolId, reloadKey) {
         rooms = null
@@ -109,23 +82,22 @@ fun MonitoringScreen(
     }
 
     LaunchedEffect(selectedRoomId) {
-        if (selectedRoomId != null && !hasPermission) {
-            permissionLauncher.launch(requiredPermissions)
+        val roomId = selectedRoomId
+        if (roomId != null) {
+            viewModel.start(schoolId, classId, roomId)
         }
     }
 
-    LaunchedEffect(hasPermission, selectedRoomId, classId) {
-        val roomId = selectedRoomId
-        if (hasPermission && roomId != null) viewModel.start(schoolId, classId, roomId)
-    }
-
     LaunchedEffect(state.done) {
-        if (state.done) onFinished()
+        if (state.done) {
+            onFinished()
+            RecordingState.done.value = false
+        }
     }
 
     BackHandler {
         val roomId = selectedRoomId
-        if (roomId == null || !hasPermission) {
+        if (roomId == null) {
             onFinished()
         } else {
             when (state.phase) {
@@ -148,7 +120,7 @@ fun MonitoringScreen(
                 navigationIcon = {
                     IconButton(onClick = {
                         val roomId = selectedRoomId
-                        if (roomId == null || !hasPermission) {
+                        if (roomId == null) {
                             onFinished()
                         } else {
                             when (state.phase) {
@@ -209,11 +181,6 @@ fun MonitoringScreen(
                             onSelect = { selectedRoomId = it },
                         )
                     }
-                }
-                !hasPermission -> {
-                    PermissionContent(
-                        onRequest = { permissionLauncher.launch(requiredPermissions) },
-                    )
                 }
                 else -> {
                     when (state.phase) {
@@ -326,22 +293,6 @@ private fun RoomSelectionContent(
                 }
             }
         }
-    }
-}
-
-@Composable
-private fun PermissionContent(onRequest: () -> Unit) {
-    Column(
-        modifier = Modifier.fillMaxSize().padding(24.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center,
-    ) {
-        Text(
-            text = "Para medir o ruído do ambiente, o MoniSom precisa de acesso ao microfone.",
-            style = MaterialTheme.typography.bodyLarge,
-        )
-        Spacer(Modifier.height(24.dp))
-        Button(onClick = onRequest) { Text("Conceder permissão") }
     }
 }
 

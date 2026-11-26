@@ -1,5 +1,10 @@
 package com.example.monisom.ui.environment
 
+import android.Manifest
+import android.content.pm.PackageManager
+import android.os.Build
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -31,8 +36,10 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.monisom.data.Monitoring
@@ -52,6 +59,7 @@ fun EnvironmentScreen(
     viewModel: EnvironmentViewModel = viewModel(),
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
+    val context = LocalContext.current
 
     LaunchedEffect(schoolId, classId) {
         viewModel.load(schoolId, classId)
@@ -60,6 +68,40 @@ fun EnvironmentScreen(
         if (refreshTrigger) {
             viewModel.refresh()
             onConsumeRefresh()
+        }
+    }
+
+    val needsNotificationPermission = Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU
+
+    val permissionLauncher = rememberLauncherForActivityResult(
+        ActivityResultContracts.RequestMultiplePermissions()
+    ) { grants ->
+        val micOk = grants[Manifest.permission.RECORD_AUDIO] == true
+        val notifOk = !needsNotificationPermission ||
+            grants[Manifest.permission.POST_NOTIFICATIONS] == true
+        if (micOk && notifOk) {
+            onStartMonitoring()
+        }
+    }
+
+    val onStartMonitoringWithPermissions = {
+        val missing = buildList {
+            if (ContextCompat.checkSelfPermission(context, Manifest.permission.RECORD_AUDIO)
+                != PackageManager.PERMISSION_GRANTED
+            ) {
+                add(Manifest.permission.RECORD_AUDIO)
+            }
+            if (needsNotificationPermission &&
+                ContextCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS)
+                != PackageManager.PERMISSION_GRANTED
+            ) {
+                add(Manifest.permission.POST_NOTIFICATIONS)
+            }
+        }
+        if (missing.isEmpty()) {
+            onStartMonitoring()
+        } else {
+            permissionLauncher.launch(missing.toTypedArray())
         }
     }
 
@@ -85,7 +127,7 @@ fun EnvironmentScreen(
         },
         floatingActionButton = {
             ExtendedFloatingActionButton(
-                onClick = onStartMonitoring,
+                onClick = onStartMonitoringWithPermissions,
                 icon = { Icon(Icons.Filled.Mic, contentDescription = null) },
                 text = { Text("Iniciar monitoramento") },
             )

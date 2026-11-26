@@ -9,5 +9,8 @@ val supabase = createSupabaseClient(
     supabaseKey = SupabaseConfig.SUPABASE_ANON_KEY
 ) {
     install(Postgrest)
-    install(Auth)
+    install(Auth) {
+        alwaysAutoRefresh = true
+        enableLifecycleCallbacks = false
+    }
 }

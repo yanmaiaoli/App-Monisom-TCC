@@ -94,6 +94,7 @@ class MonitoringViewModel(application: Application) : AndroidViewModel(applicati
                 return@launch
             }
             try {
+                Repository.refreshSessionIfNeeded()
                 val teacherId = supabase.auth.currentUserOrNull()?.id
                     ?: error("Sessão não encontrada")
                 val created = Repository.createMonitoring(

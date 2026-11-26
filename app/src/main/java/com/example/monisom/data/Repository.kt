@@ -1,12 +1,32 @@
 package com.example.monisom.data
 
+import android.util.Log
 import io.github.jan.supabase.auth.auth
 import io.github.jan.supabase.postgrest.from
 import io.github.jan.supabase.postgrest.query.Order
 
 object Repository {
 
+    private const val TAG = "MoniSom"
+
     suspend fun currentTeacherId(): String? = supabase.auth.currentUserOrNull()?.id
+
+    @OptIn(kotlin.time.ExperimentalTime::class)
+    suspend fun refreshSessionIfNeeded() {
+        val session = supabase.auth.currentSessionOrNull()
+        if (session == null) {
+            Log.w(TAG, "refreshSessionIfNeeded: sessão nula (sem sessão em memória)")
+            return
+        }
+        val nowSeconds = System.currentTimeMillis() / 1000L
+        val remainingSeconds = session.expiresAt.epochSeconds - nowSeconds
+        if (remainingSeconds > 0) return
+
+        Log.w(TAG, "refreshSessionIfNeeded: token expirado há ${-remainingSeconds}s, renovando...")
+        runCatching { supabase.auth.refreshCurrentSession() }
+            .onSuccess { Log.d(TAG, "refreshSessionIfNeeded: sessão renovada com sucesso") }
+            .onFailure { Log.e(TAG, "refreshSessionIfNeeded: falha ao renovar: ${it.message}") }
+    }
 
     suspend fun getTeacher(teacherId: String): Teacher? =
         supabase.from("teacher").select {

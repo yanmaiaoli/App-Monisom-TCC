@@ -12,6 +12,7 @@ import android.graphics.drawable.Icon
 import android.os.Build
 import android.os.IBinder
 import android.os.PowerManager
+import android.util.Log
 import androidx.core.content.ContextCompat
 import com.example.monisom.MainActivity
 import com.example.monisom.R
@@ -35,8 +36,8 @@ class RecordingService : Service() {
     private val audioRecorder = AudioRecorderService()
 
     private var recordingJob: Job? = null
-    private var levelJob: Job? = null
     private var timerJob: Job? = null
+    private var refreshJob: Job? = null
     private var wakeLock: PowerManager.WakeLock? = null
 
     private val bufferMutex = Mutex()
@@ -45,6 +46,7 @@ class RecordingService : Service() {
     override fun onBind(intent: Intent?): IBinder? = null
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        Log.d(TAG, "onStartCommand action=${intent?.action}")
         when (intent?.action) {
             ACTION_STOP -> stopRecording()
             else -> startRecording(intent)
@@ -53,9 +55,10 @@ class RecordingService : Service() {
     }
 
     override fun onDestroy() {
+        Log.d(TAG, "onDestroy: serviço destruído")
         recordingJob?.cancel()
-        levelJob?.cancel()
         timerJob?.cancel()
+        refreshJob?.cancel()
         releaseWakeLock()
         scope.cancel()
         super.onDestroy()
@@ -65,6 +68,7 @@ class RecordingService : Service() {
         if (RecordingState.isRecording.value) return
 
         val monitoringId = intent?.getStringExtra(EXTRA_MONITORING_ID) ?: return
+        Log.d(TAG, "startRecording monitoringId=$monitoringId")
         val schoolId = intent?.getStringExtra(EXTRA_SCHOOL_ID).orEmpty()
         val classId = intent?.getStringExtra(EXTRA_CLASS_ID).orEmpty()
         val roomId = intent?.getStringExtra(EXTRA_ROOM_ID).orEmpty()
@@ -81,12 +85,9 @@ class RecordingService : Service() {
         startForegroundWithType(buildNotification(monitoringId, schoolId, classId))
         acquireWakeLock()
 
-        levelJob = scope.launch {
-            audioRecorder.instantLevelDb.collect { RecordingState.instantLevelDb.value = it }
-        }
-
         recordingJob = scope.launch {
             audioRecorder.start(monitoringId).collect { reading ->
+                RecordingState.instantLevelDb.value = reading.laeq
                 addReading(reading)
             }
         }
@@ -97,12 +98,20 @@ class RecordingService : Service() {
                 RecordingState.elapsedSeconds.value += 1
             }
         }
+
+        refreshJob = scope.launch {
+            while (isActive) {
+                delay(REFRESH_INTERVAL_MS)
+                Repository.refreshSessionIfNeeded()
+            }
+        }
     }
 
     private fun stopRecording() {
+        Log.d(TAG, "stopRecording")
         recordingJob?.cancel()
-        levelJob?.cancel()
         timerJob?.cancel()
+        refreshJob?.cancel()
         RecordingState.isRecording.value = false
         RecordingState.phase.value = MonitoringPhase.Questionnaire
         releaseWakeLock()
@@ -135,8 +144,10 @@ class RecordingService : Service() {
         pendingReadings.clear()
         try {
             Repository.insertReadings(batch)
+            Log.d(TAG, "flushLocked: ${batch.size} leitura(s) enviadas ao Supabase")
         } catch (e: Exception) {
             pendingReadings.addAll(0, batch)
+            Log.e(TAG, "flushLocked: falha ao enviar leituras: ${e.message}")
         }
     }
 
@@ -182,7 +193,7 @@ class RecordingService : Service() {
 
         return Notification.Builder(this, CHANNEL_ID)
             .setContentTitle("Monitoramento em andamento")
-            .setContentText("Gravando áudio da sala")
+            .setContentText("Medindo o nível de ruído da sala (o áudio não é gravado)")
             .setSmallIcon(R.drawable.ic_launcher_foreground)
             .setContentIntent(contentIntent)
             .addAction(stopAction)
@@ -206,11 +217,13 @@ class RecordingService : Service() {
         val pm = getSystemService(Context.POWER_SERVICE) as PowerManager
         wakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "monisom:recording")
         wakeLock?.acquire()
+        Log.d(TAG, "acquireWakeLock")
     }
 
     private fun releaseWakeLock() {
         wakeLock?.let { if (it.isHeld) it.release() }
         wakeLock = null
+        Log.d(TAG, "releaseWakeLock")
     }
 
     companion object {
@@ -221,9 +234,11 @@ class RecordingService : Service() {
         private const val EXTRA_CLASS_ID = "classId"
         private const val EXTRA_ROOM_ID = "roomId"
 
+        private const val TAG = "MoniSom"
         private const val CHANNEL_ID = "monitoring"
         private const val NOTIFICATION_ID = 1
         private const val BUFFER_SIZE = 30
+        private const val REFRESH_INTERVAL_MS = 5 * 60 * 1000L
 
         fun start(
             context: Context,
